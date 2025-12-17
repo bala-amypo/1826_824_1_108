@@ -28,14 +28,14 @@ public class DynamicPriceRecord {
 
  
     public DynamicPriceRecord(Long id, Long eventId, Double computedPrice,
-                              String appliedRuleCodes, LocalDateTime computedAt) {
+        String appliedRuleCodes, LocalDateTime computedAt) {
         this.id = id;
         this.eventId = eventId;
         this.computedPrice = computedPrice;
         this.appliedRuleCodes = appliedRuleCodes;
         this.computedAt = computedAt;
     }
-     public DynamicPriceRecord{
+     public DynamicPriceRecord() {
 
      }
 }
