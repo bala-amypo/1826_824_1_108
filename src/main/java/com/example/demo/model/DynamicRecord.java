@@ -36,4 +36,7 @@ public class DynamicPriceRecord {
         this.appliedRuleCodes = appliedRuleCodes;
         this.computedAt = computedAt;
     }
+     public DynamicPriceRecord{
+        
+     }
 }
