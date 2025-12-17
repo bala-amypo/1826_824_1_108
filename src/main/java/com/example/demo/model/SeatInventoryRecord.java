@@ -8,7 +8,6 @@ public class SeatInventoryRecord {
     private Integer remainingSeats;
     private LocalDateTime updatedAt;
 
-    // Getter and Setter for id
     public Long getId() {
         return id;
     }
@@ -17,7 +16,6 @@ public class SeatInventoryRecord {
         this.id = id;
     }
 
-    // Getter and Setter for eventId
     public Long getEventId() {
         return eventId;
     }
@@ -26,7 +24,6 @@ public class SeatInventoryRecord {
         this.eventId = eventId;
     }
 
-    // Getter and Setter for totalSeats
     public Integer getTotalSeats() {
         return totalSeats;
     }
@@ -35,7 +32,6 @@ public class SeatInventoryRecord {
         this.totalSeats = totalSeats;
     }
 
-    // Getter and Setter for remainingSeats
     public Integer getRemainingSeats() {
         return remainingSeats;
     }
@@ -44,7 +40,6 @@ public class SeatInventoryRecord {
         this.remainingSeats = remainingSeats;
     }
 
-    // Getter and Setter for updatedAt
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }

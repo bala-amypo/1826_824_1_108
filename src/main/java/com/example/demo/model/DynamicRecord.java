@@ -5,10 +5,9 @@ public class DynamicPriceRecord {
     private Long id;
     private Long eventId;
     private Double computedPrice;
-    private String appliedRuleCodes; // comma-separated
+    private String appliedRuleCodes; 
     private LocalDateTime computedAt;
 
-    // Getter and Setter for id
     public Long getId() {
         return id;
     }
@@ -17,7 +16,6 @@ public class DynamicPriceRecord {
         this.id = id;
     }
 
-    // Getter and Setter for eventId
     public Long getEventId() {
         return eventId;
     }
@@ -26,7 +24,6 @@ public class DynamicPriceRecord {
         this.eventId = eventId;
     }
 
-    // Getter and Setter for computedPrice
     public Double getComputedPrice() {
         return computedPrice;
     }
@@ -35,7 +32,6 @@ public class DynamicPriceRecord {
         this.computedPrice = computedPrice;
     }
 
-    // Getter and Setter for appliedRuleCodes
     public String getAppliedRuleCodes() {
         return appliedRuleCodes;
     }
@@ -44,7 +40,6 @@ public class DynamicPriceRecord {
         this.appliedRuleCodes = appliedRuleCodes;
     }
 
-    // Getter and Setter for computedAt
     public LocalDateTime getComputedAt() {
         return computedAt;
     }

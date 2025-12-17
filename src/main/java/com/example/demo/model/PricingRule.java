@@ -9,7 +9,6 @@ public class PricingRule {
     private Double priceMultiplier;
     private Boolean active;
 
-    // Getter and Setter for id
     public Long getId() {
         return id;
     }
@@ -18,7 +17,6 @@ public class PricingRule {
         this.id = id;
     }
 
-    // Getter and Setter for ruleCode
     public String getRuleCode() {
         return ruleCode;
     }
@@ -27,7 +25,6 @@ public class PricingRule {
         this.ruleCode = ruleCode;
     }
 
-    // Getter and Setter for description
     public String getDescription() {
         return description;
     }
@@ -36,7 +33,6 @@ public class PricingRule {
         this.description = description;
     }
 
-    // Getter and Setter for minRemainingSeats
     public Integer getMinRemainingSeats() {
         return minRemainingSeats;
     }
@@ -45,7 +41,6 @@ public class PricingRule {
         this.minRemainingSeats = minRemainingSeats;
     }
 
-    // Getter and Setter for maxRemainingSeats
     public Integer getMaxRemainingSeats() {
         return maxRemainingSeats;
     }
@@ -54,7 +49,6 @@ public class PricingRule {
         this.maxRemainingSeats = maxRemainingSeats;
     }
 
-    // Getter and Setter for daysBeforeEvent
     public Integer getDaysBeforeEvent() {
         return daysBeforeEvent;
     }
@@ -63,7 +57,6 @@ public class PricingRule {
         this.daysBeforeEvent = daysBeforeEvent;
     }
 
-    // Getter and Setter for priceMultiplier
     public Double getPriceMultiplier() {
         return priceMultiplier;
     }
@@ -72,7 +65,6 @@ public class PricingRule {
         this.priceMultiplier = priceMultiplier;
     }
 
-    // Getter and Setter for active
     public Boolean getActive() {
         return active;
     }

@@ -12,7 +12,6 @@ public class Event {
     private LocalDateTime createdAt;
     private Boolean active;
 
-    // Getter and Setter for id
     public Long getId() {
         return id;
     }
@@ -21,7 +20,6 @@ public class Event {
         this.id = id;
     }
 
-    // Getter and Setter for eventCode
     public String getEventCode() {
         return eventCode;
     }
@@ -30,7 +28,6 @@ public class Event {
         this.eventCode = eventCode;
     }
 
-    // Getter and Setter for eventName
     public String getEventName() {
         return eventName;
     }
@@ -39,7 +36,6 @@ public class Event {
         this.eventName = eventName;
     }
 
-    // Getter and Setter for venue
     public String getVenue() {
         return venue;
     }
@@ -48,7 +44,6 @@ public class Event {
         this.venue = venue;
     }
 
-    // Getter and Setter for eventDate
     public LocalDate getEventDate() {
         return eventDate;
     }
@@ -57,7 +52,6 @@ public class Event {
         this.eventDate = eventDate;
     }
 
-    // Getter and Setter for basePrice
     public Double getBasePrice() {
         return basePrice;
     }
@@ -66,7 +60,6 @@ public class Event {
         this.basePrice = basePrice;
     }
 
-    // Getter and Setter for createdAt
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -75,7 +68,6 @@ public class Event {
         this.createdAt = createdAt;
     }
 
-    // Getter and Setter for active
     public Boolean getActive() {
         return active;
     }

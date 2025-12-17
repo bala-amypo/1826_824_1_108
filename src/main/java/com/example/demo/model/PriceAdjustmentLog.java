@@ -9,7 +9,6 @@ public class PriceAdjustmentLog {
     private String reason;
     private LocalDateTime changedAt;
 
-    // Getter and Setter for id
     public Long getId() {
         return id;
     }
@@ -18,7 +17,6 @@ public class PriceAdjustmentLog {
         this.id = id;
     }
 
-    // Getter and Setter for eventId
     public Long getEventId() {
         return eventId;
     }
@@ -27,7 +25,6 @@ public class PriceAdjustmentLog {
         this.eventId = eventId;
     }
 
-    // Getter and Setter for oldPrice
     public Double getOldPrice() {
         return oldPrice;
     }
@@ -36,7 +33,6 @@ public class PriceAdjustmentLog {
         this.oldPrice = oldPrice;
     }
 
-    // Getter and Setter for newPrice
     public Double getNewPrice() {
         return newPrice;
     }
@@ -45,7 +41,6 @@ public class PriceAdjustmentLog {
         this.newPrice = newPrice;
     }
 
-    // Getter and Setter for reason
     public String getReason() {
         return reason;
     }
@@ -54,7 +49,6 @@ public class PriceAdjustmentLog {
         this.reason = reason;
     }
 
-    // Getter and Setter for changedAt
     public LocalDateTime getChangedAt() {
         return changedAt;
     }

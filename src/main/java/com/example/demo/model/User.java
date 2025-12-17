@@ -6,7 +6,6 @@ public class User {
     private String password;
     private String role;
 
-    // Getter and Setter for id
     public Long getId() {
         return id;
     }
@@ -15,7 +14,6 @@ public class User {
         this.id = id;
     }
 
-    // Getter and Setter for fullName
     public String getFullName() {
         return fullName;
     }
@@ -24,7 +22,6 @@ public class User {
         this.fullName = fullName;
     }
 
-    // Getter and Setter for email
     public String getEmail() {
         return email;
     }
@@ -33,7 +30,6 @@ public class User {
         this.email = email;
     }
 
-    // Getter and Setter for password
     public String getPassword() {
         return password;
     }
@@ -42,7 +38,6 @@ public class User {
         this.password = password;
     }
 
-    // Getter and Setter for role
     public String getRole() {
         return role;
     }
