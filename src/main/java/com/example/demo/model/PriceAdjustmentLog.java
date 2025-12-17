@@ -1,5 +1,8 @@
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "price_adjustment_logs")
 public class PriceAdjustmentLog {
 
     private Long id;
@@ -9,51 +12,34 @@ public class PriceAdjustmentLog {
     private String reason;
     private LocalDateTime changedAt;
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
+    public Long getEventId() { return eventId; }
+    public void setEventId(Long eventId) { this.eventId = eventId; }
+
+    public Double getOldPrice() { return oldPrice; }
+    public void setOldPrice(Double oldPrice) { this.oldPrice = oldPrice; }
+
+    public Double getNewPrice() { return newPrice; }
+    public void setNewPrice(Double newPrice) { this.newPrice = newPrice; }
+
+    public String getReason() { return reason; }
+    public void setReason(String reason) { this.reason = reason; }
+
+    public LocalDateTime getChangedAt() { return changedAt; }
+    public void setChangedAt(LocalDateTime changedAt) { this.changedAt = changedAt; }
+
+    public PriceAdjustmentLog() {}
+
+    public PriceAdjustmentLog(Long id, Long eventId, Double oldPrice,
+                              Double newPrice, String reason,
+                              LocalDateTime changedAt) {
         this.id = id;
-    }
-
-    public Long getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(Long eventId) {
         this.eventId = eventId;
-    }
-
-    public Double getOldPrice() {
-        return oldPrice;
-    }
-
-    public void setOldPrice(Double oldPrice) {
         this.oldPrice = oldPrice;
-    }
-
-    public Double getNewPrice() {
-        return newPrice;
-    }
-
-    public void setNewPrice(Double newPrice) {
         this.newPrice = newPrice;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
         this.reason = reason;
-    }
-
-    public LocalDateTime getChangedAt() {
-        return changedAt;
-    }
-
-    public void setChangedAt(LocalDateTime changedAt) {
         this.changedAt = changedAt;
     }
 }
