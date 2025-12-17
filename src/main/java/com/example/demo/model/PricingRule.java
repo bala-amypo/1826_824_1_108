@@ -1,4 +1,5 @@
-public class PricingRule {
+public class PricingRule {import jakarta.persistence.*;
+
 
     private Long id;
     private String ruleCode;
