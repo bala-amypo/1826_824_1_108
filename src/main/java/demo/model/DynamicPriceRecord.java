@@ -10,17 +10,17 @@ public class DynamicPriceRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long eventId; // <-- Add this field
-    private Double computedPrice; // For calculated price
-    private String appliedRuleCodes; // For applied rules
-    private LocalDateTime computedAt; // Timestamp
+    private Long eventId;
+    private Double computedPrice;
+    private String appliedRuleCodes;
+    private LocalDateTime computedAt;
 
     // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public Long getEventId() { return eventId; } // <-- getter
-    public void setEventId(Long eventId) { this.eventId = eventId; } // <-- setter
+    public Long getEventId() { return eventId; }
+    public void setEventId(Long eventId) { this.eventId = eventId; }
 
     public Double getComputedPrice() { return computedPrice; }
     public void setComputedPrice(Double computedPrice) { this.computedPrice = computedPrice; }
