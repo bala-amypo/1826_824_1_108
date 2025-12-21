@@ -2,49 +2,31 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(
-    name = "event_records",
-    uniqueConstraints = @UniqueConstraint(columnNames = "eventCode")
-)
 public class EventRecord {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String eventCode;
-    private String eventName;
-    private String venue;
+    private double basePrice;
     private LocalDate eventDate;
-    private Double basePrice;
-    private Boolean active = true;
+    private boolean active; // <-- Add this field
 
-    private LocalDateTime createdAt;
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    @PrePersist
-    public void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        if (this.active == null) {
-            this.active = true;
-        }
-    }
+    public String getEventCode() { return eventCode; }
+    public void setEventCode(String eventCode) { this.eventCode = eventCode; }
 
-    public EventRecord() {}
+    public double getBasePrice() { return basePrice; }
+    public void setBasePrice(double basePrice) { this.basePrice = basePrice; }
 
-    public EventRecord(Long id, String eventCode, String eventName,
-                       String venue, LocalDate eventDate,
-                       Double basePrice, Boolean active) {
-        this.id = id;
-        this.eventCode = eventCode;
-        this.eventName = eventName;
-        this.venue = venue;
-        this.eventDate = eventDate;
-        this.basePrice = basePrice;
-        this.active = active;
-    }
+    public LocalDate getEventDate() { return eventDate; }
+    public void setEventDate(LocalDate eventDate) { this.eventDate = eventDate; }
 
-    // getters and setters
+    public boolean getActive() { return active; } // <-- Add getter
+    public void setActive(boolean active) { this.active = active; } // <-- Add setter
 }
