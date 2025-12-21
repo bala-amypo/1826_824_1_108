@@ -1,46 +1,39 @@
-//package com.example.demo.model;
-// import jakarta.persistence.*;
-// import java.time.LocalDateTime;
+package com.example.demo.model;
 
-// @Entity
-// @Table(name = "price_adjustment_logs")
-// public class PriceAdjustmentLog {
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
-//     private Long id;
-//     private Long eventId;
-//     private Double oldPrice;
-//     private Double newPrice;
-//     private String reason;
-//     private LocalDateTime changedAt;
+@Entity
+@Table(name = "price_adjustment_logs")
+public class PriceAdjustmentLog {
 
-//     public Long getId() { return id; }
-//     public void setId(Long id) { this.id = id; }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-//     public Long getEventId() { return eventId; }
-//     public void setEventId(Long eventId) { this.eventId = eventId; }
+    private Long eventId;
+    private Double oldPrice;
+    private Double newPrice;
+    private String reason;
 
-//     public Double getOldPrice() { return oldPrice; }
-//     public void setOldPrice(Double oldPrice) { this.oldPrice = oldPrice; }
+    private LocalDateTime changedAt;
 
-//     public Double getNewPrice() { return newPrice; }
-//     public void setNewPrice(Double newPrice) { this.newPrice = newPrice; }
+    @PrePersist
+    public void onCreate() {
+        this.changedAt = LocalDateTime.now();
+    }
 
-//     public String getReason() { return reason; }
-//     public void setReason(String reason) { this.reason = reason; }
+    public PriceAdjustmentLog() {}
 
-//     public LocalDateTime getChangedAt() { return changedAt; }
-//     public void setChangedAt(LocalDateTime changedAt) { this.changedAt = changedAt; }
+    public PriceAdjustmentLog(Long id, Long eventId,
+                              Double oldPrice, Double newPrice,
+                              String reason) {
+        this.id = id;
+        this.eventId = eventId;
+        this.oldPrice = oldPrice;
+        this.newPrice = newPrice;
+        this.reason = reason;
+    }
 
-//     public PriceAdjustmentLog() {}
-
-//     public PriceAdjustmentLog(Long id, Long eventId, Double oldPrice,
-//                               Double newPrice, String reason,
-//                               LocalDateTime changedAt) {
-//         this.id = id;
-//         this.eventId = eventId;
-//         this.oldPrice = oldPrice;
-//         this.newPrice = newPrice;
-//         this.reason = reason;
-//         this.changedAt = changedAt;
-//     }
-// }
+    // getters and setters
+}

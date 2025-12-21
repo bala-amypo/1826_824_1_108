@@ -1,42 +1,36 @@
-// package com.example.demo.model;
-// import jakarta.persistence.*;
-// import java.time.LocalDateTime;
+package com.example.demo.model;
 
-// @Entity
-// @Table(name = "dynamic_price_records")
-// public class DynamicPriceRecord {
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
-//     private Long id;
-//     private Long eventId;
-//     private Double computedPrice;
-//     private String appliedRuleCodes;
-//     private LocalDateTime computedAt;
+@Entity
+@Table(name = "dynamic_price_records")
+public class DynamicPriceRecord {
 
-//     public Long getId() { return id; }
-//     public void setId(Long id) { this.id = id; }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-//     public Long getEventId() { return eventId; }
-//     public void setEventId(Long eventId) { this.eventId = eventId; }
+    private Long eventId;
+    private Double computedPrice;
+    private String appliedRuleCodes;
 
-//     public Double getComputedPrice() { return computedPrice; }
-//     public void setComputedPrice(Double computedPrice) { this.computedPrice = computedPrice; }
+    private LocalDateTime computedAt;
 
-//     public String getAppliedRuleCodes() { return appliedRuleCodes; }
-//     public void setAppliedRuleCodes(String appliedRuleCodes) { this.appliedRuleCodes = appliedRuleCodes; }
+    @PrePersist
+    public void onCreate() {
+        this.computedAt = LocalDateTime.now();
+    }
 
-//     public LocalDateTime getComputedAt() { return computedAt; }
-//     public void setComputedAt(LocalDateTime computedAt) { this.computedAt = computedAt; }
+    public DynamicPriceRecord() {}
 
- 
-//     public DynamicPriceRecord(Long id, Long eventId, Double computedPrice,
-//         String appliedRuleCodes, LocalDateTime computedAt) {
-//         this.id = id;
-//         this.eventId = eventId;
-//         this.computedPrice = computedPrice;
-//         this.appliedRuleCodes = appliedRuleCodes;
-//         this.computedAt = computedAt;
-//     }
-//      public DynamicPriceRecord() {
+    public DynamicPriceRecord(Long id, Long eventId,
+                              Double computedPrice, String appliedRuleCodes) {
+        this.id = id;
+        this.eventId = eventId;
+        this.computedPrice = computedPrice;
+        this.appliedRuleCodes = appliedRuleCodes;
+    }
 
-//      }
-// }
+    // getters and setters
+}
