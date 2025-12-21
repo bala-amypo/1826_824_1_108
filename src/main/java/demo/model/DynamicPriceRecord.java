@@ -4,33 +4,30 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "dynamic_price_records")
 public class DynamicPriceRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long eventId;
-    private Double computedPrice;
-    private String appliedRuleCodes;
+    private Long eventId; // <-- Add this field
+    private Double computedPrice; // For calculated price
+    private String appliedRuleCodes; // For applied rules
+    private LocalDateTime computedAt; // Timestamp
 
-    private LocalDateTime computedAt;
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    @PrePersist
-    public void onCreate() {
-        this.computedAt = LocalDateTime.now();
-    }
+    public Long getEventId() { return eventId; } // <-- getter
+    public void setEventId(Long eventId) { this.eventId = eventId; } // <-- setter
 
-    public DynamicPriceRecord() {}
+    public Double getComputedPrice() { return computedPrice; }
+    public void setComputedPrice(Double computedPrice) { this.computedPrice = computedPrice; }
 
-    public DynamicPriceRecord(Long id, Long eventId,
-                              Double computedPrice, String appliedRuleCodes) {
-        this.id = id;
-        this.eventId = eventId;
-        this.computedPrice = computedPrice;
-        this.appliedRuleCodes = appliedRuleCodes;
-    }
+    public String getAppliedRuleCodes() { return appliedRuleCodes; }
+    public void setAppliedRuleCodes(String appliedRuleCodes) { this.appliedRuleCodes = appliedRuleCodes; }
 
-    // getters and setters
+    public LocalDateTime getComputedAt() { return computedAt; }
+    public void setComputedAt(LocalDateTime computedAt) { this.computedAt = computedAt; }
 }

@@ -3,39 +3,33 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(
-    name = "pricing_rules",
-    uniqueConstraints = @UniqueConstraint(columnNames = "ruleCode")
-)
 public class PricingRule {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String ruleCode;
-    private String description;
-    private Integer minRemainingSeats;
-    private Integer maxRemainingSeats;
-    private Integer daysBeforeEvent;
     private Double priceMultiplier;
-    private Boolean active;
+    private Integer minRemainingSeats; // <-- Add this field
+    private Integer maxRemainingSeats; // <-- If needed
+    private Integer daysBeforeEvent;   // <-- If used in service
 
-    public PricingRule() {}
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public PricingRule(Long id, String ruleCode, String description,
-                       Integer minRemainingSeats, Integer maxRemainingSeats,
-                       Integer daysBeforeEvent, Double priceMultiplier,
-                       Boolean active) {
-        this.id = id;
-        this.ruleCode = ruleCode;
-        this.description = description;
-        this.minRemainingSeats = minRemainingSeats;
-        this.maxRemainingSeats = maxRemainingSeats;
-        this.daysBeforeEvent = daysBeforeEvent;
-        this.priceMultiplier = priceMultiplier;
-        this.active = active;
-    }
+    public String getRuleCode() { return ruleCode; }
+    public void setRuleCode(String ruleCode) { this.ruleCode = ruleCode; }
 
-    // getters and setters
+    public Double getPriceMultiplier() { return priceMultiplier; }
+    public void setPriceMultiplier(Double priceMultiplier) { this.priceMultiplier = priceMultiplier; }
+
+    public Integer getMinRemainingSeats() { return minRemainingSeats; } // <-- Add getter
+    public void setMinRemainingSeats(Integer minRemainingSeats) { this.minRemainingSeats = minRemainingSeats; } // <-- Add setter
+
+    public Integer getMaxRemainingSeats() { return maxRemainingSeats; } // If needed
+    public void setMaxRemainingSeats(Integer maxRemainingSeats) { this.maxRemainingSeats = maxRemainingSeats; }
+
+    public Integer getDaysBeforeEvent() { return daysBeforeEvent; } // If needed
+    public void setDaysBeforeEvent(Integer daysBeforeEvent) { this.daysBeforeEvent = daysBeforeEvent; }
 }
