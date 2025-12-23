@@ -30,4 +30,3 @@ public class DynamicPriceRecord {
     public LocalDateTime getComputedAt() { return computedAt; }
     public void setComputedAt(LocalDateTime computedAt) { this.computedAt = computedAt; }
 }
-  private LocalDateTime computedAt;
