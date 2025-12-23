@@ -3,18 +3,29 @@ package com.example.demo.security;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
+import java.util.Date;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.security.Key;
 
 @Component
 public class JwtTokenProvider {
 
-    // ✅ secretKey MUST be declared
     private final Key secretKey = Keys.hmacShaKeyFor(
             "my-secret-key-my-secret-key-my-secret-key".getBytes()
     );
 
-    // ✅ method REQUIRED by JwtAuthenticationFilter
+    public String generateToken(Long userId, String username, String role) {
+        return Jwts.builder()
+                .setSubject(username)
+                .claim("userId", userId)
+                .claim("role", role)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 86400000))
+                .signWith(secretKey, SignatureAlgorithm.HS256)
+                .compact();
+    }
+
     public String getUsernameFromToken(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(secretKey)
@@ -24,7 +35,6 @@ public class JwtTokenProvider {
                 .getSubject();
     }
 
-    // (Optional but recommended)
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder()
