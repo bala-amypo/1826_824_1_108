@@ -13,8 +13,7 @@ public class DynamicPriceRecord {
     private Long eventId;
     private Double computedPrice;
     private String appliedRuleCodes;
-    private LocalDateTime computedAt;
-
+  
     // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -31,3 +30,4 @@ public class DynamicPriceRecord {
     public LocalDateTime getComputedAt() { return computedAt; }
     public void setComputedAt(LocalDateTime computedAt) { this.computedAt = computedAt; }
 }
+  private LocalDateTime computedAt;
