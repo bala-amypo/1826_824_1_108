@@ -8,6 +8,18 @@ import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
+    public boolean validateToken(String token) {
+    try {
+        Jwts.parserBuilder()
+            .setSigningKey(secretKey)
+            .build()
+            .parseClaimsJws(token);
+        return true;
+    } catch (Exception e) {
+        return false;
+    }
+}
+
 
     private final String JWT_SECRET = "your_secret_key"; // replace with secure key
     private final long JWT_EXPIRATION_MS = 86400000; // 1 day
