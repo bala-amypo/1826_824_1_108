@@ -1,9 +1,11 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "price_adjustment_logs")
 public class PriceAdjustmentLog {
 
     @Id
@@ -12,10 +14,73 @@ public class PriceAdjustmentLog {
 
     private Long eventId;
 
-    private double oldPrice;
-    private double newPrice;
+    private Double oldPrice;
 
-    private LocalDateTime changedAt = LocalDateTime.now();
+    private Double newPrice;
 
-    // getters/setters
+    private String reason;
+
+    private LocalDateTime changedAt;
+
+    public PriceAdjustmentLog() {
+    }
+
+    public PriceAdjustmentLog(Long eventId, Double oldPrice, Double newPrice,
+                              String reason, LocalDateTime changedAt) {
+        this.eventId = eventId;
+        this.oldPrice = oldPrice;
+        this.newPrice = newPrice;
+        this.reason = reason;
+        this.changedAt = changedAt;
+    }
+
+    // getters + setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
+    }
+
+    public Double getOldPrice() {
+        return oldPrice;
+    }
+
+    public void setOldPrice(Double oldPrice) {
+        this.oldPrice = oldPrice;
+    }
+
+    public Double getNewPrice() {
+        return newPrice;
+    }
+
+    public void setNewPrice(Double newPrice) {
+        this.newPrice = newPrice;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public LocalDateTime getChangedAt() {
+        return changedAt;
+    }
+
+    public void setChangedAt(LocalDateTime changedAt) {
+        this.changedAt = changedAt;
+    }
 }
