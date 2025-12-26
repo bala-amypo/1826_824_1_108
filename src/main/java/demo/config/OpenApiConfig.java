@@ -1,22 +1,24 @@
- 
-//  package com.example.demo.config;
+package com.example.demo.config;
 
-//  import io.swagger.v3.oas.models.OpenAPI;
-//  import io.swagger.v3.oas.models.servers.Server;
-//  import org.springframework.context.annotation.Bean;
-//  import org.springframework.context.annotation.Configuration;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import io.swagger.v3.oas.annotations.servers.Server; // Import this
+import org.springframework.context.annotation.Configuration;
 
-//  import java.util.List;
-
-//  @Configuration
-//  public class OpenApiConfig {
-
-//      @Bean
-//          public OpenAPI customOpenAPI() {
-//                  return new OpenAPI()
-//                                  .servers(List.of(
-//                                                          new Server().url("https://9030.32procr.amypo.ai/")
-//                                                                          ));
-//                                                                              }
-//                                                                              }
-                                                                             
+@Configuration
+@OpenAPIDefinition(
+    info = @Info(title = "Dynamic Event Ticket Pricing API", version = "v1"),
+    servers = {
+        @Server(url = "https://9108.pro604cr.amypo.ai/", description = "Local Server")
+    }
+)
+@SecurityScheme(
+    name = "bearerAuth",
+    type = SecuritySchemeType.HTTP,
+    bearerFormat = "JWT",
+    scheme = "bearer"
+)
+public class OpenApiConfig {
+}
