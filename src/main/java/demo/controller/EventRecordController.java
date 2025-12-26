@@ -2,14 +2,15 @@ package com.example.demo.controller;
 
 import com.example.demo.model.EventRecord;
 import com.example.demo.service.EventRecordService;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/events")
-@Tag(name = "Event APIs")
+@SecurityRequirement(name = "bearerAuth")
 public class EventRecordController {
 
     private final EventRecordService service;
@@ -19,28 +20,27 @@ public class EventRecordController {
     }
 
     @PostMapping
-    public EventRecord createEvent(@RequestBody EventRecord event) {
-        return service.createEvent(event);
+    public ResponseEntity<EventRecord> createEvent(@RequestBody EventRecord event) {
+        return ResponseEntity.ok(service.createEvent(event));
     }
 
     @GetMapping("/{id}")
-    public EventRecord getEvent(@PathVariable Long id) {
-        return service.getEventById(id);
+    public ResponseEntity<EventRecord> getEventById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getEventById(id));
     }
 
     @GetMapping
-    public List<EventRecord> getAllEvents() {
-        return service.getAllEvents();
+    public ResponseEntity<List<EventRecord>> getAllEvents() {
+        return ResponseEntity.ok(service.getAllEvents());
     }
 
     @PutMapping("/{id}/status")
-    public EventRecord updateStatus(@PathVariable Long id,
-                                    @RequestParam boolean active) {
-        return service.updateEventStatus(id, active);
+    public ResponseEntity<EventRecord> updateEventStatus(@PathVariable Long id, @RequestBody Boolean active) {
+        return ResponseEntity.ok(service.updateEventStatus(id, active));
     }
 
-    @GetMapping("/lookup/{code}")
-    public EventRecord getByCode(@PathVariable String code) {
-        return service.getEventByCode(code).orElseThrow();
+    @GetMapping("/lookup/{eventCode}")
+    public ResponseEntity<EventRecord> getEventByCode(@PathVariable String eventCode) {
+        return ResponseEntity.of(service.getEventByCode(eventCode));
     }
 }

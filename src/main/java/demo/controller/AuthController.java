@@ -1,57 +1,56 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.ApiResponse;
+import com.example.demo.dto.AuthRequest;
+import com.example.demo.dto.AuthResponse;
+import com.example.demo.model.User;
 import com.example.demo.security.CustomUserDetailsService;
 import com.example.demo.security.JwtTokenProvider;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
-    
-    private final CustomUserDetailsService customUserDetailsService;
+
+    private final CustomUserDetailsService userService;
     private final JwtTokenProvider jwtTokenProvider;
-    private final BCryptPasswordEncoder passwordEncoder;
-    
-    public AuthController(CustomUserDetailsService customUserDetailsService,
-                         JwtTokenProvider jwtTokenProvider,
-                         BCryptPasswordEncoder passwordEncoder) {
-        this.customUserDetailsService = customUserDetailsService;
+    private final PasswordEncoder passwordEncoder;
+
+    public AuthController(CustomUserDetailsService userService, JwtTokenProvider jwtTokenProvider, PasswordEncoder passwordEncoder) {
+        this.userService = userService;
         this.jwtTokenProvider = jwtTokenProvider;
         this.passwordEncoder = passwordEncoder;
     }
-    
+
     @PostMapping("/register")
-    public Map<String, Object> register(@RequestBody Map<String, String> request) {
-        String name = request.get("name");
-        String email = request.get("email");
-        String password = request.get("password");
-        String role = request.get("role");
-        
-        String encodedPassword = passwordEncoder.encode(password);
-        return customUserDetailsService.registerUser(name, email, encodedPassword, role);
+    public ResponseEntity<ApiResponse> registerUser(@RequestBody User user) {
+        Map<String, Object> registeredUser = userService.registerUser(
+                user.getFullName(),
+                user.getEmail(),
+                passwordEncoder.encode(user.getPassword()),
+                user.getRole()
+        );
+        return ResponseEntity.ok(new ApiResponse(true, "User registered successfully", registeredUser));
     }
-    
+
     @PostMapping("/login")
-    public Map<String, String> login(@RequestBody Map<String, String> request) {
-        String email = request.get("email");
-        String password = request.get("password");
+    public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest authRequest) {
         
-        Authentication authentication = new UsernamePasswordAuthenticationToken(email, password);
+        userService.loadUserByUsername(authRequest.getEmail()); 
         
-        // In real implementation, you'd verify password here
-        Map<String, Object> userData = Map.of("userId", 1L, "role", "ADMIN");
+        Authentication auth = new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword(), Collections.emptyList());
         
-        String token = jwtTokenProvider.generateToken(authentication, 1L, "ADMIN");
-        
-        return Map.of("token", token, "email", email);
-    }
-    
-    public String getUserData(String email) {
-        return email;
+        Long userId = 1L; 
+        String role = "USER"; 
+
+        String token = jwtTokenProvider.generateToken(auth, userId, role);
+        return ResponseEntity.ok(new AuthResponse(token, userId, authRequest.getEmail(), role));
     }
 }

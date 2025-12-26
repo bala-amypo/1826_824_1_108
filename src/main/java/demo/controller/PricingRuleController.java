@@ -2,37 +2,50 @@ package com.example.demo.controller;
 
 import com.example.demo.model.PricingRule;
 import com.example.demo.service.PricingRuleService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/rules")
+@RequestMapping("/api/pricing-rules")
+@SecurityRequirement(name = "bearerAuth")
 public class PricingRuleController {
-    
-    private final PricingRuleService pricingRuleService;
-    
-    public PricingRuleController(PricingRuleService pricingRuleService) {
-        this.pricingRuleService = pricingRuleService;
+
+    private final PricingRuleService service;
+
+    public PricingRuleController(PricingRuleService service) {
+        this.service = service;
     }
-    
+
     @PostMapping
-    public PricingRule createRule(@RequestBody PricingRule rule) {
-        return pricingRuleService.createRule(rule);
+    public ResponseEntity<PricingRule> createRule(@RequestBody PricingRule rule) {
+        return ResponseEntity.ok(service.createRule(rule));
     }
-    
-    @GetMapping
-    public List<PricingRule> getAllRules() {
-        return pricingRuleService.getAllRules();
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PricingRule> updateRule(@PathVariable Long id, @RequestBody PricingRule rule) {
+        rule.setId(id);
+        return ResponseEntity.ok(service.createRule(rule));
     }
-    
+
     @GetMapping("/active")
-    public List<PricingRule> getActiveRules() {
-        return pricingRuleService.getActiveRules();
+    public ResponseEntity<List<PricingRule>> getActiveRules() {
+        return ResponseEntity.ok(service.getActiveRules());
     }
-    
-    @PutMapping("/{id}/status")
-    public PricingRule updateRule(@PathVariable Long id, @RequestParam Boolean active) {
-        return pricingRuleService.updateRuleStatus(id, active);
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PricingRule> getRuleById(@PathVariable Long id) {
+        return service.getAllRules().stream()
+                .filter(r -> r.getId().equals(id))
+                .findFirst()
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PricingRule>> getAllRules() {
+        return ResponseEntity.ok(service.getAllRules());
     }
 }
