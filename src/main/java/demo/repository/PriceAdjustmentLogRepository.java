@@ -10,3 +10,4 @@ public interface PriceAdjustmentLogRepository
 
     List<PriceAdjustmentLog> findByEventId(Long eventId);
 }
+
