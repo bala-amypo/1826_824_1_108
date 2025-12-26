@@ -1,19 +1,18 @@
 package com.example.demo.service;
 
-import com.example.demo.model.EventRecord;
+import com.example.demo.entity.EventRecord;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface EventRecordService {
 
-    EventRecord createEvent(EventRecord event);
+    EventRecord create(EventRecord event);
 
-    EventRecord getEventById(Long id);
+    EventRecord getById(Long id);
 
-    Optional<EventRecord> getEventByCode(String eventCode);
+    List<EventRecord> getAll();
 
-    List<EventRecord> getAllEvents();
+    EventRecord update(Long id, EventRecord event);
 
-    EventRecord updateEventStatus(Long id, boolean active);
+    void delete(Long id);
 }
