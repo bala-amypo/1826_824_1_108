@@ -1,10 +1,9 @@
 package com.example.demo.security;
 
-import com.example.demo.model.User;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -12,43 +11,33 @@ import java.util.Map;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-
-    private final Map<String, User> users = new HashMap<>();
-    private long userIdSequence = 1L;
-
-    public Map<String, Object> registerUser(String fullName, String email, String password, String role) {
-        if (users.containsKey(email)) {
-            throw new RuntimeException("User already exists");
-        }
-
-        User user = new User();
-        user.setId(userIdSequence++);
-        user.setFullName(fullName);
-        user.setEmail(email);
-        user.setPassword(password); // assume BCrypt hashed before storing
-        user.setRole(role);
-
-        users.put(email, user);
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("userId", user.getId());
-        response.put("role", user.getRole());
-        response.put("email", user.getEmail());
-
-        return response;
+    
+    private final Map<String, Map<String, Object>> users = new HashMap<>();
+    private long userIdCounter = 1;
+    
+    public Map<String, Object> registerUser(String name, String email, String encodedPassword, String role) {
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("userId", userIdCounter++);
+        userData.put("name", name);
+        userData.put("email", email);
+        userData.put("password", encodedPassword);
+        userData.put("role", role);
+        
+        users.put(email, userData);
+        return userData;
     }
-
+    
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = users.get(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found: " + username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Map<String, Object> userData = users.get(email);
+        if (userData == null) {
+            throw new UsernameNotFoundException("User not found: " + email);
         }
-
-        return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getEmail())
-                .password(user.getPassword())
-                .roles(user.getRole())
-                .build();
+        
+        return User.builder()
+            .username(email)
+            .password((String) userData.get("password"))
+            .roles((String) userData.get("role"))
+            .build();
     }
 }
