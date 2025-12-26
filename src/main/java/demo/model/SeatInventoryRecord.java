@@ -1,27 +1,33 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "seat_inventory_records")
 public class SeatInventoryRecord {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long eventId;
+    private String seatCategory;
     private Integer totalSeats;
-    private Integer remainingSeats;
-    private LocalDateTime updatedAt;
+    private Integer availableSeats;
 
-    public SeatInventoryRecord() {}
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    // Getters/setters omitted
+    public Long getEventId() { return eventId; }
+    public void setEventId(Long eventId) { this.eventId = eventId; }
 
-    @PrePersist
-    @PreUpdate
-    public void preUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
+    public String getSeatCategory() { return seatCategory; }
+    public void setSeatCategory(String seatCategory) { this.seatCategory = seatCategory; }
+
+    public Integer getTotalSeats() { return totalSeats; }
+    public void setTotalSeats(Integer totalSeats) { this.totalSeats = totalSeats; }
+
+    public Integer getAvailableSeats() { return availableSeats; }
+    public void setAvailableSeats(Integer availableSeats) { this.availableSeats = availableSeats; }
 }

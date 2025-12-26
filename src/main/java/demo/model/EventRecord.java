@@ -1,47 +1,34 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "event_records")
 public class EventRecord {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String eventCode;
-
     private String eventName;
+    private LocalDateTime eventDate;
     private String venue;
-    private LocalDate eventDate;
-
-    @Column(nullable = false)
     private Double basePrice;
 
-    private LocalDateTime createdAt;
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    private Boolean active;
+    public String getEventName() { return eventName; }
+    public void setEventName(String eventName) { this.eventName = eventName; }
 
-    @OneToMany(mappedBy = "eventId")
-    private List<SeatInventoryRecord> inventories;
+    public LocalDateTime getEventDate() { return eventDate; }
+    public void setEventDate(LocalDateTime eventDate) { this.eventDate = eventDate; }
 
-    @OneToMany(mappedBy = "eventId")
-    private List<DynamicPriceRecord> dynamicPrices;
+    public String getVenue() { return venue; }
+    public void setVenue(String venue) { this.venue = venue; }
 
-    @OneToMany(mappedBy = "eventId")
-    private List<PriceAdjustmentLog> priceAdjustments;
-
-    public EventRecord() {}
-
-    // Getters and setters omitted for brevity
-
-    @PrePersist
-    public void prePersist() {
-        createdAt = LocalDateTime.now();
-        if (active == null) active = true;
-    }
+    public Double getBasePrice() { return basePrice; }
+    public void setBasePrice(Double basePrice) { this.basePrice = basePrice; }
 }
