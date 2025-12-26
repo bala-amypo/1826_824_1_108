@@ -1,24 +1,29 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "pricing_rules")
 public class PricingRule {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String ruleCode;
+    private String ruleName;
+    private String conditionType;
+    private Double adjustmentValue; // e.g., +10% or -5%
 
-    private String description;
-    private Integer minRemainingSeats;
-    private Integer maxRemainingSeats;
-    private Integer daysBeforeEvent;
-    private Double priceMultiplier;
-    private Boolean active;
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public PricingRule() {}
-    // Getters and setters
+    public String getRuleName() { return ruleName; }
+    public void setRuleName(String ruleName) { this.ruleName = ruleName; }
+
+    public String getConditionType() { return conditionType; }
+    public void setConditionType(String conditionType) { this.conditionType = conditionType; }
+
+    public Double getAdjustmentValue() { return adjustmentValue; }
+    public void setAdjustmentValue(Double adjustmentValue) { this.adjustmentValue = adjustmentValue; }
 }
