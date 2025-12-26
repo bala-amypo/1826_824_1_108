@@ -1,12 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.SeatInventoryRecord;
+import com.example.demo.model.SeatInventoryRecord;
 
 public interface SeatInventoryService {
-
-    SeatInventoryRecord create(SeatInventoryRecord record);
-
-    SeatInventoryRecord getByEvent(Long eventId);
-
-    SeatInventoryRecord updateBookedSeats(Long eventId, int bookedSeats);
+    SeatInventoryRecord createInventory(SeatInventoryRecord inventory);
+    SeatInventoryRecord getInventoryByEvent(Long eventId);
+    SeatInventoryRecord updateInventory(Long id, Integer remainingSeats);
 }

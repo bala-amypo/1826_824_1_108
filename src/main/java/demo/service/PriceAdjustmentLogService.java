@@ -1,12 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.PriceAdjustmentLog;
-
+import com.example.demo.model.PriceAdjustmentLog;
 import java.util.List;
 
 public interface PriceAdjustmentLogService {
-
-    PriceAdjustmentLog save(PriceAdjustmentLog log);
-
-    List<PriceAdjustmentLog> getByEvent(Long eventId);
+    List<PriceAdjustmentLog> getAdjustmentsByEvent(Long eventId);
 }
