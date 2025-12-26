@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -14,45 +14,7 @@ public class DynamicPriceRecord {
 
     private double computedPrice;
 
-    private String appliedRuleCodes;
+    private LocalDateTime computedAt = LocalDateTime.now();
 
-    private LocalDateTime computedAt;
-
-    public DynamicPriceRecord() {}
-
-    public Long getId() {
-        return id;
-    }
-
-    public Long getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
-    }
-
-    public double getComputedPrice() {
-        return computedPrice;
-    }
-
-    public void setComputedPrice(double computedPrice) {
-        this.computedPrice = computedPrice;
-    }
-
-    public String getAppliedRuleCodes() {
-        return appliedRuleCodes;
-    }
-
-    public void setAppliedRuleCodes(String appliedRuleCodes) {
-        this.appliedRuleCodes = appliedRuleCodes;
-    }
-
-    public LocalDateTime getComputedAt() {
-        return computedAt;
-    }
-
-    public void setComputedAt(LocalDateTime computedAt) {
-        this.computedAt = computedAt;
-    }
+    // getters/setters
 }
