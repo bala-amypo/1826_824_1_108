@@ -1,29 +1,43 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "pricing_rules")
 public class PricingRule {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String ruleName;
-    private String conditionType;
-    private Double adjustmentValue; // e.g., +10% or -5%
-
+    
+    @Column(unique = true, nullable = false)
+    private String ruleCode;
+    
+    private Integer minRemainingSeats;
+    private Integer maxRemainingSeats;
+    private Integer daysBeforeEvent;
+    private Double priceMultiplier;
+    private Boolean active;
+    
     // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
-    public String getRuleName() { return ruleName; }
-    public void setRuleName(String ruleName) { this.ruleName = ruleName; }
-
-    public String getConditionType() { return conditionType; }
-    public void setConditionType(String conditionType) { this.conditionType = conditionType; }
-
-    public Double getAdjustmentValue() { return adjustmentValue; }
-    public void setAdjustmentValue(Double adjustmentValue) { this.adjustmentValue = adjustmentValue; }
+    
+    public String getRuleCode() { return ruleCode; }
+    public void setRuleCode(String ruleCode) { this.ruleCode = ruleCode; }
+    
+    public Integer getMinRemainingSeats() { return minRemainingSeats; }
+    public void setMinRemainingSeats(Integer minRemainingSeats) { this.minRemainingSeats = minRemainingSeats; }
+    
+    public Integer getMaxRemainingSeats() { return maxRemainingSeats; }
+    public void setMaxRemainingSeats(Integer maxRemainingSeats) { this.maxRemainingSeats = maxRemainingSeats; }
+    
+    public Integer getDaysBeforeEvent() { return daysBeforeEvent; }
+    public void setDaysBeforeEvent(Integer daysBeforeEvent) { this.daysBeforeEvent = daysBeforeEvent; }
+    
+    public Double getPriceMultiplier() { return priceMultiplier; }
+    public void setPriceMultiplier(Double priceMultiplier) { this.priceMultiplier = priceMultiplier; }
+    
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
 }
