@@ -1,33 +1,41 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.SeatInventoryRecord;
-import com.example.demo.exception.NotFoundException;
+import com.example.demo.exception.BadRequestException;
+import com.example.demo.model.SeatInventoryRecord;
+import com.example.demo.repository.EventRecordRepository;
 import com.example.demo.repository.SeatInventoryRecordRepository;
 import com.example.demo.service.SeatInventoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class SeatInventoryServiceImpl implements SeatInventoryService {
+    private final SeatInventoryRecordRepository inventoryRepository;
+    private final EventRecordRepository eventRepository;
 
-    @Autowired
-    private SeatInventoryRecordRepository repository;
-
-    @Override
-    public SeatInventoryRecord create(SeatInventoryRecord record) {
-        return repository.save(record);
+    public SeatInventoryServiceImpl(SeatInventoryRecordRepository inventoryRepository, EventRecordRepository eventRepository) {
+        this.inventoryRepository = inventoryRepository;
+        this.eventRepository = eventRepository;
     }
 
     @Override
-    public SeatInventoryRecord getByEvent(Long eventId) {
-        return repository.findByEventId(eventId)
-                .orElseThrow(() -> new NotFoundException("Seat inventory not found"));
+    public SeatInventoryRecord createInventory(SeatInventoryRecord inventory) {
+        eventRepository.findById(inventory.getEventId())
+                .orElseThrow(() -> new BadRequestException("Event not found"));
+
+        if (inventory.getRemainingSeats() > inventory.getTotalSeats()) {
+            throw new BadRequestException("Remaining seats cannot exceed total seats");
+        }
+        return inventoryRepository.save(inventory);
     }
 
     @Override
-    public SeatInventoryRecord updateBookedSeats(Long eventId, int bookedSeats) {
-        SeatInventoryRecord record = getByEvent(eventId);
-        record.setBookedSeats(bookedSeats);
-        return repository.save(record);
+    public SeatInventoryRecord getInventoryByEvent(Long eventId) {
+        return inventoryRepository.findByEventId(eventId).orElse(null);
+    }
+
+    @Override
+    public List<SeatInventoryRecord> getAllInventories() {
+        return inventoryRepository.findAll();
     }
 }
