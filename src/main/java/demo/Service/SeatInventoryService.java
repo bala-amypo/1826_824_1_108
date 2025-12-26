@@ -1,17 +1,12 @@
 package com.example.demo.service;
 
-import com.example.demo.model.SeatInventoryRecord;
-
-import java.util.List;
-import java.util.Optional;
+import com.example.demo.entity.SeatInventoryRecord;
 
 public interface SeatInventoryService {
 
-    SeatInventoryRecord createInventory(SeatInventoryRecord inventory);
+    SeatInventoryRecord create(SeatInventoryRecord record);
 
-    SeatInventoryRecord updateRemainingSeats(Long eventId, Integer remainingSeats);
+    SeatInventoryRecord getByEvent(Long eventId);
 
-    Optional<SeatInventoryRecord> getInventoryByEvent(Long eventId);
-
-    List<SeatInventoryRecord> getAllInventories();
+    SeatInventoryRecord updateBookedSeats(Long eventId, int bookedSeats);
 }
