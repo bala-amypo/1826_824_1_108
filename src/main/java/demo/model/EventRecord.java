@@ -6,68 +6,27 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "event_records")
 public class EventRecord {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String eventName;
-
-    private String venue;
-
-    private Double basePrice;
-
+    private String name;
     private LocalDateTime eventDate;
+    private boolean active;
 
-    public EventRecord() {
-    }
-
-    public EventRecord(String eventName, String venue, Double basePrice, LocalDateTime eventDate) {
-        this.eventName = eventName;
-        this.venue = venue;
-        this.basePrice = basePrice;
+    public EventRecord() {}
+    public EventRecord(String name, LocalDateTime eventDate, boolean active) {
+        this.name = name;
         this.eventDate = eventDate;
+        this.active = active;
     }
 
-    // getters + setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEventName() {
-        return eventName;
-    }
-
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
-    }
-
-    public String getVenue() {
-        return venue;
-    }
-
-    public void setVenue(String venue) {
-        this.venue = venue;
-    }
-
-    public Double getBasePrice() {
-        return basePrice;
-    }
-
-    public void setBasePrice(Double basePrice) {
-        this.basePrice = basePrice;
-    }
-
-    public LocalDateTime getEventDate() {
-        return eventDate;
-    }
-
-    public void setEventDate(LocalDateTime eventDate) {
-        this.eventDate = eventDate;
-    }
+    // getters and setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public LocalDateTime getEventDate() { return eventDate; }
+    public void setEventDate(LocalDateTime eventDate) { this.eventDate = eventDate; }
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 }
