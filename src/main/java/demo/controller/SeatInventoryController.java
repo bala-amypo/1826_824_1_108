@@ -4,37 +4,33 @@ import com.example.demo.model.SeatInventoryRecord;
 import com.example.demo.service.SeatInventoryService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/inventory")
 public class SeatInventoryController {
-
-    private final SeatInventoryService inventoryService;
-
-    public SeatInventoryController(SeatInventoryService inventoryService) {
-        this.inventoryService = inventoryService;
+    
+    private final SeatInventoryService seatInventoryService;
+    
+    public SeatInventoryController(SeatInventoryService seatInventoryService) {
+        this.seatInventoryService = seatInventoryService;
     }
-
+    
     @PostMapping
-    public SeatInventoryRecord create(@RequestBody SeatInventoryRecord record) {
-        return inventoryService.createInventory(record);
+    public SeatInventoryRecord createInventory(@RequestBody SeatInventoryRecord inventory) {
+        return seatInventoryService.createInventory(inventory);
     }
-
-    @PutMapping("/{eventId}/remaining")
-    public SeatInventoryRecord updateRemaining(@PathVariable Long eventId,
-                                               @RequestParam Integer remainingSeats) {
-        return inventoryService.updateRemainingSeats(eventId, remainingSeats);
-    }
-
+    
     @GetMapping("/event/{eventId}")
-    public SeatInventoryRecord getByEvent(@PathVariable Long eventId) {
-        return inventoryService.getInventoryByEvent(eventId)
-                .orElseThrow();
+    public SeatInventoryRecord getInventoryByEvent(@PathVariable Long eventId) {
+        return seatInventoryService.getInventoryByEvent(eventId);
     }
-
-    @GetMapping
-    public List<SeatInventoryRecord> getAll() {
-        return inventoryService.getAllInventories();
+    
+    @PutMapping("/{id}")
+    public SeatInventoryRecord updateRemainingSeats(@PathVariable Long id, 
+                                                    @RequestParam Integer remainingSeats) {
+        return seatInventoryService.updateInventory(id, remainingSeats);
+    }
+    
+    public String getAllInventories() {
+        return "All inventories";
     }
 }
