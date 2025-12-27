@@ -42,22 +42,22 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            // FIX: Enable CORS with the configuration defined below
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf(AbstractHttpConfigurer::disable)
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**", "/swagger-ui/**", "/v3/api-docs/**", "/simple-status", "/hello").permitAll()
-                .anyRequest().authenticated()
-            );
+    // @Bean
+    // public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    //     http
+    //         // FIX: Enable CORS with the configuration defined below
+    //         .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+    //         .csrf(AbstractHttpConfigurer::disable)
+    //         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+    //         .authorizeHttpRequests(auth -> auth
+    //             .requestMatchers("/auth/**", "/swagger-ui/**", "/v3/api-docs/**", "/simple-status", "/hello").permitAll()
+    //             .anyRequest().authenticated()
+    //         );
 
-        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+    //     http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
-        return http.build();
-    }
+    //     return http.build();
+    // }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
